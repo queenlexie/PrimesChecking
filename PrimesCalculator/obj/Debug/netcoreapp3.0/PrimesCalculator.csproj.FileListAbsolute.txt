@@ -1,0 +1,11 @@
+C:\Users\Alessandra\source\repos\PrimesCalculator\PrimesCalculator\bin\Debug\netcoreapp3.0\PrimesCalculator.exe
+C:\Users\Alessandra\source\repos\PrimesCalculator\PrimesCalculator\bin\Debug\netcoreapp3.0\PrimesCalculator.deps.json
+C:\Users\Alessandra\source\repos\PrimesCalculator\PrimesCalculator\bin\Debug\netcoreapp3.0\PrimesCalculator.runtimeconfig.json
+C:\Users\Alessandra\source\repos\PrimesCalculator\PrimesCalculator\bin\Debug\netcoreapp3.0\PrimesCalculator.runtimeconfig.dev.json
+C:\Users\Alessandra\source\repos\PrimesCalculator\PrimesCalculator\bin\Debug\netcoreapp3.0\PrimesCalculator.dll
+C:\Users\Alessandra\source\repos\PrimesCalculator\PrimesCalculator\bin\Debug\netcoreapp3.0\PrimesCalculator.pdb
+C:\Users\Alessandra\source\repos\PrimesCalculator\PrimesCalculator\obj\Debug\netcoreapp3.0\PrimesCalculator.csprojAssemblyReference.cache
+C:\Users\Alessandra\source\repos\PrimesCalculator\PrimesCalculator\obj\Debug\netcoreapp3.0\PrimesCalculator.AssemblyInfoInputs.cache
+C:\Users\Alessandra\source\repos\PrimesCalculator\PrimesCalculator\obj\Debug\netcoreapp3.0\PrimesCalculator.AssemblyInfo.cs
+C:\Users\Alessandra\source\repos\PrimesCalculator\PrimesCalculator\obj\Debug\netcoreapp3.0\PrimesCalculator.dll
+C:\Users\Alessandra\source\repos\PrimesCalculator\PrimesCalculator\obj\Debug\netcoreapp3.0\PrimesCalculator.pdb
