@@ -1,57 +1,96 @@
 ﻿using System;
+using System.Collections.Generic;
 
-namespace PrimesCalculator
-{
-    class Program
-    {
-        static void Main(string[] args)
-        { /*
-            //FermatTest
-            Console.WriteLine(FermatTest.IsProbablyPrime(37, 10));
+namespace PrimesCalculator {
+    public class Program {
+        private readonly IPrimalityTest fermatTest;
+        private readonly IPrimalityTest millerRabinTest;
+        private readonly IPrimalityTest aksTest;
+        private readonly IPrimalityTest fermatPseudoprimeTest;
+        private readonly ISet<int> alreadyCheckedNumbers;
 
-            //Fermat Pseudoprimes
+        public Program(){
+            fermatTest = new FermatTest(10);
+            millerRabinTest = new MillerRabinTest(10);
+            aksTest = new AKSTest();
+            fermatPseudoprimeTest = new FermatPseudoprimeTest(2);
+            alreadyCheckedNumbers = new HashSet<int>();
+        }
+        
 
-            Console.WriteLine(FermatPseudoprimeTest.Check(645, 2));
+        public static void Main(string[] args){
+            new Program().doRun();
+        }
 
-            //MR Test
-            int k = 4; // Number of iterations 
+        private void doRun(){
+            Console.WriteLine("Hello! Choose one of the following:");
+            Console.WriteLine("- provide the number (integer) you would like to check whether is prime or not,");
+            Console.WriteLine("- type 'print-processed' to see the list of all checked primes,");
+            Console.WriteLine("- type 'exit' to exit program.");
+            String input = Console.ReadLine();
+            bool continueExec = true;
+            switch (input){
+                case "exit":
+                    continueExec = false;
+                    break;
+                case "print-processed":
+                    Console.WriteLine("Already processed numbers:");
+                    Console.WriteLine($"({String.Join(", ", alreadyCheckedNumbers)})");
+                    break;
+                default:
+                    try
+                    {
+                        int number = Convert.ToInt32(input);
+                        doRunPrimeTest(number);
+                    } catch (Exception){
+                        Console.WriteLine($"Invalid input parsed: {input}");
+                    }
+                    break;
+            }
+            if (continueExec)
+                doRun();
+        }
 
-            Console.WriteLine("All primes smaller " +
-                                       "than 100: ");
+        private void doRunPrimeTest(int number){
+            Counter counter = new Counter();
+            PerformFermatTest(number, counter);
+            PerformMillerRabinTest(number, counter);
+            PerformAksTest(number, counter);
+            PerformFermatPseudoprimeTest(number, counter);
 
-            for (int n = 1; n < 100; n++)
-                if (MillerRabinTest.isPrime(n, k))
-                    Console.Write(n + " ");
+            Console.WriteLine(MakeTestResultMessage(counter.GetCounter()));
+            alreadyCheckedNumbers.Add(number);
+        }
 
-            //AKS Test
-            if (AKSTest.isPrime(37))
-                Console.WriteLine("Prime");
-            else
-                Console.WriteLine("Not Prime");
-                */
-            int counter = 0;
-            Console.WriteLine("Hello! Provide the number you would like to check whether is prime or not");
-            int number=Convert.ToInt32(Console.ReadLine());
-            if(FermatTest.IsProbablyPrime(number, 10) == true)
-            {
-                counter++;
+        private void PerformFermatTest(int number, Counter counter){
+            if (fermatTest.IsPrime(number)){
+                counter.Increment();
                 Console.WriteLine("Result of Fermat Test is true, it means that you may have chosen a prime number");
-              
             }
             else
                 Console.WriteLine("Result of Fermat Test is false, it means that you may have chosen a composite number");
-            if (MillerRabinTest.isPrime(number, 10) == true)
-            {
-                counter++;
+        }
+
+        private void PerformMillerRabinTest(int number, Counter counter){
+            if (millerRabinTest.IsPrime(number)){
+                counter.Increment();
                 Console.WriteLine("Result of Miller-Rabin Test is true, it means that you may have chosen a prime number");
             }
             else
                 Console.WriteLine("Result of Miller-Rabin Test is false, it means that you may have chosen a composite number");
-            if (number < 100)
-            {
-                if (AKSTest.isPrime(number) == true)
-                {
-                    counter++;
+        }
+
+        private void PerformFermatPseudoprimeTest(int number, Counter counter){
+            if (fermatPseudoprimeTest.IsPrime(number)){
+                Console.WriteLine("Unfortunately, you chose a pseudoprime");
+                counter.Decrement();
+            }
+        }
+
+        private void PerformAksTest(int number, Counter counter){
+            if (number < 100){
+                if (aksTest.IsPrime(number)){
+                    counter.Increment();
                     Console.WriteLine("Result of AKS Test is true, it means that you may have chosen a prime number");
                 }
                 else
@@ -59,31 +98,16 @@ namespace PrimesCalculator
             }
             else
                 Console.WriteLine(" Your number is too big to provide AKS Test, so it will be skipped");
-            if (FermatPseudoprimeTest.Check(number, 2) == true)
-            {
-                Console.WriteLine("Unfortunately, you chose a pseudoprime");
-                counter = -1;
-            }
+        }
 
-            switch (counter)
-            {
-                case 0:
-                    Console.WriteLine("Your number is definitely a composite number");
-                    break;
-                case 1:
-                    Console.WriteLine("Your number is composite");
-                    break;
-                case 2:
-                    Console.WriteLine("Your number may be a prime number");
-                    break;
-                case 3:
-                    Console.WriteLine("Your number is definitely a prime number");
-                    break;
-                default:
-                    Console.WriteLine("Your number probably is a pseudoprime");
-                    break;
-            }
-
-            }
+        private String MakeTestResultMessage(int counter){
+            return counter switch {
+                0 => "Your number is definitely a composite number",
+                1 => "Your number is composite",
+                2 => "Your number may be a prime number",
+                3 => "Your number is definitely a prime number",
+                _ => "Your number probably is a pseudoprime",
+            };
+        }
     }
 }

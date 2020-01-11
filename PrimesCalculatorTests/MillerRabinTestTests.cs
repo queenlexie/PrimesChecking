@@ -1,23 +1,18 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using PrimesCalculator;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace PrimesCalculator.Tests
-{
+namespace PrimesCalculator.Tests{
     [TestClass()]
-    public class MillerRabinTestTests
-    {
+    public class MillerRabinTestTests{
         [TestMethod()]
-        public void IsProbablyPrimeTest()
-        {
-            Assert.IsTrue(MillerRabinTest.isPrime(37, 10));
+        public void IsProbablyPrimeTest(){
+            var testUnderTest = new MillerRabinTest(10);
+            Assert.IsTrue(testUnderTest.IsPrime(37));
         }
+
         [TestMethod()]
-        public void IsProbablyCompositeTest()
-        {
-            Assert.IsFalse(MillerRabinTest.isPrime(50, 10));
+        public void IsProbablyCompositeTest(){
+            var testUnderTest = new MillerRabinTest(10);
+            Assert.IsFalse(testUnderTest.IsPrime(50));
         }
     }
 }
