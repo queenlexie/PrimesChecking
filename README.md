@@ -1,2 +1,2 @@
 # PrimesChecking
-![DiagramUML](diagram.png)
+![DiagramUML](diagram1.png)
