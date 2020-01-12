@@ -1,2 +1,2 @@
 # PrimesChecking
-![DiagramUML](diagram1.png)
+![DiagramUML](C:/Users/Alessandra/source/repos/PrimesCalculator/diagram1.png)
